@@ -1,0 +1,6 @@
+[build]
+command = "npm run build"
+publish = "vinicola-serra-dourada-main/vinicola-serra-dourada/dist"
+
+[build.environment]
+NODE_VERSION = "22"

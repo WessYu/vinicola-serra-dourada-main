@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.netlify/
+*.log
+
+vinicola-serra-dourada-main/vinicola-serra-dourada/node_modules/
+vinicola-serra-dourada-main/vinicola-serra-dourada/dist/

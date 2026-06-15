@@ -1,0 +1,11 @@
+{
+  "name": "vinicola-serra-dourada-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix ./vinicola-serra-dourada-main/vinicola-serra-dourada run dev",
+    "api": "npm --prefix ./vinicola-serra-dourada-main/vinicola-serra-dourada run api",
+    "build": "npm --prefix ./vinicola-serra-dourada-main/vinicola-serra-dourada run build",
+    "preview": "npm --prefix ./vinicola-serra-dourada-main/vinicola-serra-dourada run preview",
+    "install:app": "npm --prefix ./vinicola-serra-dourada-main/vinicola-serra-dourada install"
+  }
+}

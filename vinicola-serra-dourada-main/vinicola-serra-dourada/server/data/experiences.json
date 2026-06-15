@@ -1,0 +1,29 @@
+[
+  {
+    "id": "degustacao-classica",
+    "title": "Degustação Clássica de Altitude",
+    "duration": "90 min",
+    "availability": "Quarta a domingo",
+    "price": 165,
+    "description": "Tour guiado pela cave, prova de 5 rótulos e harmonização com tábua regional.",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Enjoying%20a%20bottle%20of%20red%20wine%20(Unsplash).jpg"
+  },
+  {
+    "id": "sunset-private",
+    "title": "Sunset Private Terrace",
+    "duration": "2h",
+    "availability": "Sexta e sábado",
+    "price": 320,
+    "description": "Mesa reservada, espumante de boas-vindas e vista para os vinhedos ao pôr do sol.",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Vineyard%20during%20sunset%20(Unsplash).jpg"
+  },
+  {
+    "id": "jantar-harmonizado",
+    "title": "Jantar Harmonizado na Cave",
+    "duration": "3h",
+    "availability": "Datas especiais",
+    "price": 520,
+    "description": "Menu em etapas com rótulos comentados pelo sommelier e vagas super limitadas.",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Justin%20Vineyard%20wine%20tasting%20room.jpg"
+  }
+]

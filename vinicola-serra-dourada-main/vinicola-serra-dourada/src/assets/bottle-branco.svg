@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="760" viewBox="0 0 520 760" fill="none">
+  <defs>
+    <linearGradient id="glass" x1="120" y1="40" x2="400" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff" stop-opacity="0.65"/>
+      <stop offset="0.35" stop-color="#ffffff" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#d9a63a"/>
+      <stop offset="1" stop-color="#b0892e"/>
+    </linearGradient>
+    <filter id="shadow" x="-25%" y="-15%" width="150%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <!-- bottle body -->
+    <path d="M232 70c0-22 18-40 40-40h-64c22 0 40 18 40 40v70c0 14-6 26-16 35l-30 26c-12 10-18 24-18 39v360c0 38 31 69 69 69h34c38 0 69-31 69-69V270c0-15-7-29-18-39l-30-26c-10-9-16-21-16-35V70z" fill="#0b0b0c" opacity="0.92"/>
+    <!-- glass highlight -->
+    <path d="M230 84c0-18 14-32 32-32h-38c18 0 32 14 32 32v82c0 10-4 20-12 27l-26 24c-10 8-15 20-15 33v380c0 28 23 51 51 51h24c-30-10-42-30-42-55V264c0-12 5-23 14-31l26-24c8-7 12-17 12-27V84z" fill="url(#glass)"/>
+
+    <!-- liquid -->
+    <path d="M204 560c0 22 18 40 40 40h32c22 0 40-18 40-40V318c0-10-4-19-12-26l-18-16c-7-6-11-15-11-24v-14h-20v14c0 9-4 18-11 24l-18 16c-8 7-12 16-12 26v242z" fill="url(#liq)" opacity="0.95"/>
+
+    <!-- label -->
+    <rect x="170" y="380" width="180" height="190" rx="20" fill="#f8f6f7"/>
+    <rect x="190" y="405" width="140" height="28" rx="14" fill="#d9a63a" opacity="0.22"/>
+    <text x="260" y="455" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="26" fill="#2a2326">Serra Dourada</text>
+    <text x="260" y="485" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="14" fill="#6b6467" letter-spacing="1.6">BRANCO SECO</text>
+    <rect x="205" y="505" width="110" height="16" rx="8" fill="#2a2326" opacity="0.08"/>
+    <rect x="205" y="530" width="86" height="16" rx="8" fill="#2a2326" opacity="0.08"/>
+    <rect x="205" y="555" width="96" height="16" rx="8" fill="#2a2326" opacity="0.08"/>
+
+    <!-- neck label -->
+    <rect x="230" y="172" width="60" height="70" rx="12" fill="#f8f6f7" opacity="0.85"/>
+    <path d="M230 206h60" stroke="#d9a63a" stroke-width="4" opacity="0.5"/>
+  </g>
+</svg>

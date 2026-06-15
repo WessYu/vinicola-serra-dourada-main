@@ -1,0 +1,79 @@
+{
+  "brand": {
+    "name": "Vinícola Serra Dourada",
+    "location": "Pinto Bandeira, Serra Gaúcha"
+  },
+  "hero": {
+    "eyebrow": "Vinhos de altitude, hospitalidade e presença premium",
+    "title": "Uma nova safra digital para vender rótulos, reservas e experiências.",
+    "description": "A Serra Dourada agora tem um site com impacto de marca, fotos reais, animações elegantes e backend local para fazer o comercial acontecer de verdade.",
+    "primaryCta": "Explorar catálogo",
+    "secondaryCta": "Agendar degustação",
+    "backgroundImage": "/images/hero-vineyard.jpg",
+    "featuredWine": {
+      "name": "Reserva do Horizonte 2021",
+      "description": "Blend de Cabernet Sauvignon e Merlot com 12 meses em carvalho francês, pensado para jantares longos e adegas exigentes.",
+      "grape": "Cabernet Sauvignon + Merlot",
+      "vintage": "Safra 2021",
+      "price": 189.9
+    }
+  },
+  "stats": [
+    { "value": "22 ha", "label": "Vinhedos de altitude" },
+    { "value": "8 rótulos", "label": "Curadoria pronta para venda" },
+    { "value": "48h", "label": "Fluxo ágil para pedidos" },
+    { "value": "4.9/5", "label": "Média das degustações privadas" }
+  ],
+  "highlights": [
+    {
+      "index": "01",
+      "title": "Visual muito mais premium",
+      "description": "Tipografia editorial, painéis translúcidos, texturas, luz ambiente e ritmo de leitura mais sofisticado."
+    },
+    {
+      "index": "02",
+      "title": "Fotos reais de vinhos e vinhedos",
+      "description": "A nova experiência usa imagens reais para transmitir qualidade e sair do aspecto genérico de portfólio."
+    },
+    {
+      "index": "03",
+      "title": "Backend local pronto para operar",
+      "description": "Pedidos, reservas, contatos e newsletter agora vão para APIs reais com persistência em JSON."
+    }
+  ],
+  "story": {
+    "title": "Do terroir ao checkout, tudo conversa com a mesma sensação de exclusividade.",
+    "description": "A reformulação organiza a jornada completa: descoberta dos rótulos, prova social, agendamento da visita e fechamento do pedido. O site ganhou profundidade visual, narrativa comercial e estrutura técnica para evoluir sem retrabalho.",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Justin%20Vineyard%20wine%20tasting%20room.jpg",
+    "points": [
+      {
+        "title": "Narrativa de marca",
+        "description": "Cada seção reforça origem, terroir e ocasião de consumo."
+      },
+      {
+        "title": "Conversão distribuída",
+        "description": "Há CTA de compra, reserva e clube em pontos diferentes da página."
+      },
+      {
+        "title": "Base pronta para crescer",
+        "description": "Produtos, experiências e textos estão no backend, então o conteúdo pode evoluir sem refazer a interface."
+      }
+    ]
+  },
+  "club": {
+    "title": "Clube mensal com prioridade nos lançamentos e relacionamento contínuo.",
+    "description": "Assinantes recebem lançamentos antes do público, vagas antecipadas para sunsets e uma régua mais forte de recompra.",
+    "benefits": [
+      "2 ou 4 garrafas por ciclo com curadoria sazonal.",
+      "Descontos exclusivos em eventos e reservas privadas.",
+      "Frete preferencial e acesso antecipado a microlotes.",
+      "Comunicação segmentada por estilo de vinho favorito."
+    ]
+  },
+  "contact": {
+    "address": "Estrada dos Vinhedos, Km 11, Pinto Bandeira - RS",
+    "hours": "Quarta a domingo · 10h às 19h",
+    "phone": "(54) 99911-2048",
+    "email": "hospitalidade@serradourada.com.br"
+  }
+}
