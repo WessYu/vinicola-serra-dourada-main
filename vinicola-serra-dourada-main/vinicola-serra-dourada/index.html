@@ -5,11 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Vinícola Serra Dourada com catálogo premium, fotos reais, reservas, clube e backend local para pedidos."
+      content="Vinícola Serra Dourada com catálogo premium, fotos reais, reservas, clube e experiência pronta para publicação."
     />
     <title>Vinícola Serra Dourada | Vinhos de Altitude</title>
   </head>
   <body>
+    <form name="reserva-vinicola" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="date" />
+      <input name="guests" />
+      <input name="notes" />
+    </form>
+
+    <form name="contato-vinicola" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="interest" />
+      <input name="message" />
+    </form>
+
+    <form name="newsletter-vinicola" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="email" />
+      <input name="preference" />
+    </form>
+
+    <form name="pedido-vinicola" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="city" />
+      <input name="notes" />
+      <input name="cart_items" />
+      <input name="total" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,8 +1,15 @@
 import React, { startTransition, useDeferredValue, useEffect, useState } from "react"
-
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:4174/api"
+import { siteData } from "./siteData"
 
 const initialStatus = { type: "idle", message: "" }
+const isLocalApiEnvironment =
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+
+function getLocalApiUrl(path) {
+  const base = import.meta.env.VITE_API_URL ?? "http://localhost:4174/api"
+  return `${base}/${path}`
+}
 
 function readStoredCart() {
   try {
@@ -20,10 +27,28 @@ function formatCurrency(value) {
   }).format(value)
 }
 
+function encodeNetlifyForm(payload) {
+  return new URLSearchParams(payload).toString()
+}
+
+async function submitToNetlify(formName, payload) {
+  const response = await fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: encodeNetlifyForm({
+      "form-name": formName,
+      ...payload,
+    }),
+  })
+
+  if (!response.ok) {
+    throw new Error("Não foi possível enviar o formulário para o Netlify.")
+  }
+}
+
 function App() {
-  const [bootstrap, setBootstrap] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState("")
+  const [bootstrap, setBootstrap] = useState(siteData)
+  const [loading, setLoading] = useState(false)
   const [catalogType, setCatalogType] = useState("Todos")
   const [sortKey, setSortKey] = useState("featured")
   const [searchTerm, setSearchTerm] = useState("")
@@ -36,11 +61,15 @@ function App() {
   const deferredSearch = useDeferredValue(searchTerm)
 
   useEffect(() => {
+    if (!isLocalApiEnvironment) {
+      return undefined
+    }
+
     let active = true
 
     async function loadBootstrap() {
       try {
-        const response = await fetch(`${API_BASE}/bootstrap`)
+        const response = await fetch(getLocalApiUrl("bootstrap"))
         if (!response.ok) {
           throw new Error("Não foi possível carregar o catálogo completo.")
         }
@@ -48,16 +77,9 @@ function App() {
         const payload = await response.json()
         if (active) {
           setBootstrap(payload)
-          setError("")
         }
-      } catch (loadError) {
-        if (active) {
-          setError(loadError.message)
-        }
-      } finally {
-        if (active) {
-          setLoading(false)
-        }
+      } catch {
+        // Em produção ou sem a API local, o site continua com os dados embutidos.
       }
     }
 
@@ -73,10 +95,6 @@ function App() {
   }, [cart])
 
   useEffect(() => {
-    if (loading) {
-      return undefined
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -92,7 +110,7 @@ function App() {
     nodes.forEach((node) => observer.observe(node))
 
     return () => observer.disconnect()
-  }, [loading, bootstrap])
+  }, [bootstrap])
 
   const content = bootstrap?.content ?? {}
   const hero = content.hero ?? {}
@@ -177,29 +195,44 @@ function App() {
 
     const form = new FormData(event.currentTarget)
     const payload = {
-      name: form.get("name"),
-      email: form.get("email"),
-      date: form.get("date"),
+      name: String(form.get("name") || ""),
+      email: String(form.get("email") || ""),
+      date: String(form.get("date") || ""),
       guests: Number(form.get("guests")),
-      notes: form.get("notes"),
+      notes: String(form.get("notes") || ""),
     }
 
     try {
-      const response = await fetch(`${API_BASE}/reservations`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-      const result = await response.json()
-      if (!response.ok) {
-        throw new Error(result.message || "Não foi possível concluir a reserva.")
+      if (isLocalApiEnvironment) {
+        const response = await fetch(getLocalApiUrl("reservations"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        const result = await response.json()
+        if (!response.ok) {
+          throw new Error(result.message || "Não foi possível concluir a reserva.")
+        }
+
+        setReservationStatus({
+          type: "success",
+          message: `Reserva confirmada para ${result.record.name}. Código ${result.record.code}.`,
+        })
+      } else {
+        await submitToNetlify("reserva-vinicola", {
+          name: payload.name,
+          email: payload.email,
+          date: payload.date,
+          guests: String(payload.guests),
+          notes: payload.notes,
+        })
+        setReservationStatus({
+          type: "success",
+          message: "Reserva enviada com sucesso. A equipe vai confirmar os detalhes por e-mail.",
+        })
       }
 
       event.currentTarget.reset()
-      setReservationStatus({
-        type: "success",
-        message: `Reserva confirmada para ${result.record.name}. Código ${result.record.code}.`,
-      })
     } catch (submitError) {
       setReservationStatus({ type: "error", message: submitError.message })
     }
@@ -211,25 +244,37 @@ function App() {
 
     const form = new FormData(event.currentTarget)
     const payload = {
-      name: form.get("name"),
-      email: form.get("email"),
-      interest: form.get("interest"),
-      message: form.get("message"),
+      name: String(form.get("name") || ""),
+      email: String(form.get("email") || ""),
+      interest: String(form.get("interest") || ""),
+      message: String(form.get("message") || ""),
     }
 
     try {
-      const response = await fetch(`${API_BASE}/contacts`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-      const result = await response.json()
-      if (!response.ok) {
-        throw new Error(result.message || "Falha ao enviar sua mensagem.")
+      if (isLocalApiEnvironment) {
+        const response = await fetch(getLocalApiUrl("contacts"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        const result = await response.json()
+        if (!response.ok) {
+          throw new Error(result.message || "Falha ao enviar sua mensagem.")
+        }
+
+        setContactStatus({
+          type: "success",
+          message: `Mensagem recebida. Protocolo ${result.record.code}.`,
+        })
+      } else {
+        await submitToNetlify("contato-vinicola", payload)
+        setContactStatus({
+          type: "success",
+          message: "Mensagem enviada. A equipe comercial vai retornar em breve.",
+        })
       }
 
       event.currentTarget.reset()
-      setContactStatus({ type: "success", message: `Mensagem recebida. Protocolo ${result.record.code}.` })
     } catch (submitError) {
       setContactStatus({ type: "error", message: submitError.message })
     }
@@ -241,23 +286,35 @@ function App() {
 
     const form = new FormData(event.currentTarget)
     const payload = {
-      email: form.get("email"),
-      preference: form.get("preference"),
+      email: String(form.get("email") || ""),
+      preference: String(form.get("preference") || ""),
     }
 
     try {
-      const response = await fetch(`${API_BASE}/newsletter`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-      const result = await response.json()
-      if (!response.ok) {
-        throw new Error(result.message || "Não foi possível registrar seu e-mail.")
+      if (isLocalApiEnvironment) {
+        const response = await fetch(getLocalApiUrl("newsletter"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        const result = await response.json()
+        if (!response.ok) {
+          throw new Error(result.message || "Não foi possível registrar seu e-mail.")
+        }
+
+        setNewsletterStatus({
+          type: "success",
+          message: `Clube ativo para ${result.record.email}.`,
+        })
+      } else {
+        await submitToNetlify("newsletter-vinicola", payload)
+        setNewsletterStatus({
+          type: "success",
+          message: "Cadastro concluído. Você entrou para a lista da Serra Dourada.",
+        })
       }
 
       event.currentTarget.reset()
-      setNewsletterStatus({ type: "success", message: `Clube ativo para ${result.record.email}.` })
     } catch (submitError) {
       setNewsletterStatus({ type: "error", message: submitError.message })
     }
@@ -276,32 +333,54 @@ function App() {
     const form = new FormData(event.currentTarget)
     const payload = {
       customer: {
-        name: form.get("name"),
-        email: form.get("email"),
-        phone: form.get("phone"),
-        city: form.get("city"),
+        name: String(form.get("name") || ""),
+        email: String(form.get("email") || ""),
+        phone: String(form.get("phone") || ""),
+        city: String(form.get("city") || ""),
       },
-      notes: form.get("notes"),
+      notes: String(form.get("notes") || ""),
       items: cart.map((item) => ({ productId: item.id, quantity: item.quantity })),
     }
 
     try {
-      const response = await fetch(`${API_BASE}/orders`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-      const result = await response.json()
-      if (!response.ok) {
-        throw new Error(result.message || "O pedido não foi concluído.")
+      if (isLocalApiEnvironment) {
+        const response = await fetch(getLocalApiUrl("orders"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+        const result = await response.json()
+        if (!response.ok) {
+          throw new Error(result.message || "O pedido não foi concluído.")
+        }
+
+        setOrderStatus({
+          type: "success",
+          message: `Pedido ${result.record.code} confirmado com total de ${formatCurrency(result.record.total)}.`,
+        })
+      } else {
+        await submitToNetlify("pedido-vinicola", {
+          name: payload.customer.name,
+          email: payload.customer.email,
+          phone: payload.customer.phone,
+          city: payload.customer.city,
+          notes: payload.notes,
+          cart_items: payload.items
+            .map((item) => {
+              const product = products.find((currentProduct) => currentProduct.id === item.productId)
+              return `${product?.name || item.productId} x${item.quantity}`
+            })
+            .join(" | "),
+          total: formatCurrency(subtotal),
+        })
+        setOrderStatus({
+          type: "success",
+          message: "Pedido enviado. A equipe vai confirmar pagamento e entrega com você.",
+        })
       }
 
       event.currentTarget.reset()
       setCart([])
-      setOrderStatus({
-        type: "success",
-        message: `Pedido ${result.record.code} confirmado com total de ${formatCurrency(result.record.total)}.`,
-      })
     } catch (submitError) {
       setOrderStatus({ type: "error", message: submitError.message })
     }
@@ -312,17 +391,6 @@ function App() {
       <div className="loading-screen">
         <div className="loading-orb" />
         <p>Carregando a nova experiência da Serra Dourada...</p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-panel">
-          <p>{error}</p>
-          <p>Suba o backend com `npm run api` e recarregue a página.</p>
-        </div>
       </div>
     )
   }
@@ -418,8 +486,8 @@ function App() {
               <h2>Catálogo vivo com busca, filtros e compra imediata.</h2>
             </div>
             <p>
-              Todo o catálogo agora vem do backend local, com cards editoriais, imagens reais e um
-              carrinho persistente.
+              Em localhost o conteúdo pode vir da API Node. No Netlify, a experiência continua
+              íntegra com o catálogo incorporado ao build e formulários de envio online.
             </p>
           </div>
 
@@ -479,9 +547,15 @@ function App() {
                   <div className="product-footer">
                     <div>
                       <strong>{formatCurrency(product.price)}</strong>
-                      <small>{renderStars(product.rating)} · {product.rating.toFixed(1)}</small>
+                      <small>
+                        {renderStars(product.rating)} · {product.rating.toFixed(1)}
+                      </small>
                     </div>
-                    <button type="button" className="primary-button compact" onClick={() => addToCart(product)}>
+                    <button
+                      type="button"
+                      className="primary-button compact"
+                      onClick={() => addToCart(product)}
+                    >
                       Adicionar
                     </button>
                   </div>
@@ -517,7 +591,7 @@ function App() {
               <span className="eyebrow">Enoturismo</span>
               <h2>Visitas, degustações guiadas e sunsets privados.</h2>
             </div>
-            <p>As experiências também são alimentadas por API e já chegam prontas para reservas.</p>
+            <p>As experiências já chegam prontas para uma jornada comercial muito mais forte.</p>
           </div>
 
           <div className="experience-grid">
@@ -709,7 +783,7 @@ function App() {
           <form className="checkout-form floating-card" onSubmit={handleOrderSubmit}>
             <div className="card-heading">
               <span className="eyebrow">Checkout</span>
-              <h2>Backend pronto para pedidos</h2>
+              <h2>Pedido pronto para envio</h2>
             </div>
 
             <label>
