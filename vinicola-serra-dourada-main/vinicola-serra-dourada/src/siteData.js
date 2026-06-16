@@ -8,7 +8,7 @@ export const siteData = {
       eyebrow: "Vinhos de altitude, hospitalidade e presença premium",
       title: "Uma nova safra digital para vender rótulos, reservas e experiências.",
       description:
-        "A Serra Dourada agora tem um site com impacto de marca, fotos reais, animações elegantes e estrutura pronta para apresentar catálogo, clube e experiências com muito mais força.",
+        "A Serra Dourada agora tem um site com impacto de marca, fotos reais, animações elegantes e uma presença à altura dos seus rótulos e experiências.",
       primaryCta: "Explorar catálogo",
       secondaryCta: "Agendar degustação",
       backgroundImage: "/images/hero-vineyard.jpg",
@@ -42,16 +42,16 @@ export const siteData = {
       },
       {
         index: "03",
-        title: "Pronto para rodar local e online",
+        title: "Jornada de compra mais forte",
         description:
-          "Em localhost o site conversa com a API Node. No Netlify, o catálogo continua funcionando e os formulários podem ser enviados online.",
+          "Catálogo, clube, reservas e pedidos aparecem de forma clara para valorizar a marca e facilitar a conversão.",
       },
     ],
     story: {
       title:
         "Do terroir ao checkout, tudo conversa com a mesma sensação de exclusividade.",
       description:
-        "A reformulação organiza a jornada completa: descoberta dos rótulos, prova social, agendamento da visita e fechamento do pedido. O site ganhou profundidade visual, narrativa comercial e estrutura técnica para evoluir sem retrabalho.",
+        "A reformulação organiza a jornada completa: descoberta dos rótulos, prova social, agendamento da visita e fechamento do pedido. O site ganhou profundidade visual, narrativa comercial e mais presença de marca em cada etapa.",
       image:
         "https://commons.wikimedia.org/wiki/Special:FilePath/Justin%20Vineyard%20wine%20tasting%20room.jpg",
       points: [
@@ -64,9 +64,9 @@ export const siteData = {
           description: "Há CTA de compra, reserva e clube em pontos diferentes da página.",
         },
         {
-          title: "Base pronta para crescer",
+          title: "Marca com fôlego",
           description:
-            "Produtos, experiências e textos estão organizados para evoluir sem refazer a interface.",
+            "A experiência foi desenhada para sustentar novos lançamentos, campanhas e ocasiões especiais sem perder sofisticação.",
         },
       ],
     },

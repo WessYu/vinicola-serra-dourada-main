@@ -486,8 +486,8 @@ function App() {
               <h2>Catálogo vivo com busca, filtros e compra imediata.</h2>
             </div>
             <p>
-              Em localhost o conteúdo pode vir da API Node. No Netlify, a experiência continua
-              íntegra com o catálogo incorporado ao build e formulários de envio online.
+              Uma seleção pensada para destacar rótulos, ocasiões de consumo e o desejo de visitar
+              a Serra Dourada de perto.
             </p>
           </div>
 
