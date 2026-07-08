@@ -1,31 +1,34 @@
 # Vinícola Serra Dourada
 
-Landing page premium para uma vinícola fictícia, desenvolvida como projeto de portfólio para demonstrar interface visual, responsividade e funcionalidades front-end.
+Landing page premium para uma vinícola fictícia, desenvolvida como projeto de portfólio para demonstrar criação de interface, experiência visual, responsividade e funcionalidades front-end.
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-111827?style=for-the-badge)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+O projeto simula uma marca sofisticada do setor de vinhos, com vitrine de produtos, carrinho lateral, filtros, ordenação e modal de agendamento.
+
+![Status](https://img.shields.io/badge/status-em%20evolução-111827?style=for-the-badge)
+![React](https://img.shields.io/badge/React-111827?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-111827?style=for-the-badge&logo=vite&logoColor=FFD62E)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-111827?style=for-the-badge&logo=tailwindcss&logoColor=38BDF8)
 
 ---
 
-## Sobre o projeto
+## Visão geral
 
-A **Vinícola Serra Dourada** é uma landing page com vitrine de produtos, filtro, ordenação, carrinho lateral com persistência via `localStorage` e modal de agendamento.
+A **Vinícola Serra Dourada** foi criada para praticar uma interface com aparência premium, foco em conversão e estrutura de produto.
 
-O projeto foi criado para simular uma experiência real de marca premium, unindo estética, usabilidade e organização de código.
+Mais do que uma landing page simples, o projeto apresenta interações comuns em sites comerciais: vitrine, filtro, ordenação, carrinho persistente e chamada para agendamento.
 
 ---
 
 ## Funcionalidades
 
-- Vitrine de produtos
-- Filtro e ordenação
+- Hero section com estética premium
+- Vitrine de vinhos/produtos
+- Filtros e ordenação de itens
 - Carrinho lateral em formato drawer
-- Persistência com `localStorage`
+- Persistência do carrinho com `localStorage`
 - Modal de agendamento
-- Interface responsiva
-- Visual premium
+- Layout responsivo para desktop e mobile
+- Identidade visual com foco em luxo, vinho e sofisticação
 
 ---
 
@@ -35,28 +38,51 @@ O projeto foi criado para simular uma experiência real de marca premium, unindo
 - Vite
 - TailwindCSS
 - JavaScript
+- LocalStorage
 - Git e GitHub
+
+---
+
+## O que este projeto demonstra
+
+- Construção de landing page com aparência comercial
+- Organização de componentes e seções
+- Aplicação de UI/UX em uma marca premium
+- Responsividade e adaptação visual
+- Uso de estado e persistência local
+- Criação de uma experiência próxima de produto real
 
 ---
 
 ## Como rodar localmente
 
 ```bash
-git clone https://github.com/WessYu/vinicola-serra-dourada.git
-cd vinicola-serra-dourada
+git clone https://github.com/WessYu/vinicola-serra-dourada-main.git
+cd vinicola-serra-dourada-main
 npm install
+npm run install:app
 npm run dev
 ```
 
 ---
 
-## Outros projetos
+## Scripts disponíveis
 
-- [Portfólio Front-end](https://github.com/WessYu/Portfolio---React)
-- [StudyFlow](https://github.com/WessYu/studyflow)
-- [Nocturna Atelier](https://github.com/WessYu/Nocturna-Atelier)
-- [Travelgram](https://github.com/WessYu/Travelgram)
-- [Turismo](https://github.com/WessYu/Turismo)
+```bash
+npm run dev
+npm run build
+npm run preview
+npm run api
+```
+
+---
+
+## Próximas melhorias
+
+- Adicionar preview online no README
+- Incluir screenshots da interface
+- Melhorar dados dos produtos
+- Evoluir carrinho para fluxo completo de checkout simulado
 
 ---
 
@@ -69,4 +95,4 @@ Desenvolvido por **Wesley Cruz**.
 
 ---
 
-> Projeto criado para demonstrar habilidades em React, layout premium, responsividade e experiência de usuário.
+> Projeto criado para demonstrar habilidades em React, TailwindCSS, responsividade, layout premium e experiência de usuário.
